@@ -3,7 +3,7 @@
 # Filename     :  SnackyTools.psm1
 # Autor        :  iSnackyCracky (https://isnackycracky.de/ -- https://github.com/isnackycracky/)
 # Description  :  PowerShell-Module with some Functions for daily use
-# Repository   :  https://github.com/isnackycracky/psmodule
+# Repository   :  https://github.com/isnackycracky/SnackyTools
 ###############################################################################################################
 
 # Include functions which are outsourced in .ps1-files

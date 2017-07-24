@@ -3,7 +3,7 @@
 # Filename     :  Connect-SharePointOnline.ps1
 # Autor        :  iSnackyCracky (https://isnackycracky.de/ -- https://github.com/isnackycracky/)
 # Description  :  Connect to the SharePointOnline PowerShell
-# Repository   :  https://github.com/isnackycracky/psmodule
+# Repository   :  https://github.com/isnackycracky/SnackyTools
 ###############################################################################################################
 
 <#

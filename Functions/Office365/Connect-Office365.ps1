@@ -3,7 +3,7 @@
 # Filename     :  Connect-Office365.ps1
 # Autor        :  iSnackyCracky (https://isnackycracky.de/ -- https://github.com/isnackycracky/)
 # Description  :  Connect to the Office 365 and Exchange Online powershell
-# Repository   :  https://github.com/isnackycracky/psmodule
+# Repository   :  https://github.com/isnackycracky/SnackyTools
 ###############################################################################################################
 
 <#

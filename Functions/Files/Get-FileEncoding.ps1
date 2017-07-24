@@ -3,7 +3,7 @@
 # Filename     :  Get-FileEncoding.ps1
 # Autor        :  iSnackyCracky (https://isnackycracky.de/ -- https://github.com/isnackycracky/)
 # Description  :  Get the encoding of a file
-# Repository   :  https://github.com/isnackycracky/psmodule
+# Repository   :  https://github.com/isnackycracky/SnackyTools
 ###############################################################################################################
 
 <#

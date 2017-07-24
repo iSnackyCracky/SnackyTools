@@ -3,7 +3,7 @@
 # Filename     :  Get-DriveCapacity.ps1
 # Autor        :  iSnackyCracky (https://isnackycracky.de/ -- https://github.com/isnackycracky/)
 # Description  :  Get the drive capacity / free space of Computers
-# Repository   :  https://github.com/isnackycracky/psmodule
+# Repository   :  https://github.com/isnackycracky/SnackyTools
 ###############################################################################################################
 
 <#
