@@ -39,15 +39,21 @@ function Get-TotalMailboxSize {
             $TISString = [regex]::Match($TIS, $regex).Groups[1]
             $TDISString = [regex]::Match($TDIS, $regex).Groups[1]
             
-            $TISString = $TISString -replace "Bytes",""
-            $TDISString = $TDISString -replace "Bytes",""
+            $TISString = $TISString -replace "Bytes", ""
+            $TDISString = $TDISString -replace "Bytes", ""
             
-            $TISValue = [INT]$TISString
-            $TDISValue = [INT]$TDISString
+            $TISValue = [decimal]$TISString
+            $TDISValue = [decimal]$TDISString
 
-            $TotalSize = [decimal]::Round((($TISValue + $TDISValue)/1024)/1024)
+            [decimal]$TotalSizeVal = $TotalSizeVal + $TISValue + $TDISValue
         }
-        Write-Host $TotalSize
+        
+        $TotalSize = New-Object -TypeName psobject
+        $TotalSize | Add-Member -MemberType NoteProperty -Name Value -Value $TotalSizeVal
+        $TotalSize.Value | Add-Member -MemberType ScriptMethod -Name ToGB -Value {[System.Math]::round(($this / 1GB), 2)}
+        $TotalSize.Value | Add-Member -MemberType ScriptMethod -Name ToMB -Value {[System.Math]::round(($this / 1MB), 2)}
+
+        Write-Output -InputObject $TotalSize
     }
 
     End {
