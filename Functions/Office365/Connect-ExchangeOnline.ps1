@@ -7,42 +7,41 @@
 ###############################################################################################################
 
 <#
-  .SYNOPSIS
-  Connect to the Exchange Online powershell
+.SYNOPSIS
+Connect to the Exchange Online powershell
 
-  .DESCRIPTION
-  Connect to the Exchange Online powershell
+.DESCRIPTION
+Connect to the Exchange Online powershell
 
-  .EXAMPLE
-  Connect-ExchangeOnline
+.EXAMPLE
+Connect-ExchangeOnline
 #>
 
-function Connect-ExchangeOnline
-{
-  [CmdletBinding()]
-  param(
-    [Parameter(Position=0,Mandatory=$false,HelpMessage="Login-Credentials")]
-    [System.Management.Automation.CredentialAttribute()]$Credential
-  )
+function Connect-ExchangeOnline {
+    [CmdletBinding()]
+    param(
+        [Parameter(Position = 0, Mandatory = $false, HelpMessage = "Login-Credentials")]
+        [System.Management.Automation.CredentialAttribute()]$Credential
+    )
 
-  Begin{
+    Begin {
 
-  }
-
-  Process{
-    # Get login-credentials, if none were provided as parameter
-    If (!$Credential) {
-      $Credential = Get-Credential
     }
 
-    # Create the Exchange Online session
-    $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://ps.outlook.com/powershell -Credential $Credential -Authentication Basic –AllowRedirection
+    Process {
+        # Get login-credentials, if none were provided as parameter
+        If (!$Credential) {
+            $Credential = Get-Credential
+        }
 
-    # Import the created Exchange Online session
-    Import-Module(Import-PSSession $Session -AllowClobber -DisableNameChecking) -Global -DisableNameChecking
-  }
+        # Create the Exchange Online session
+        $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://ps.outlook.com/powershell -Credential $Credential -Authentication Basic –AllowRedirection
 
-  End{
+        # Import the created Exchange Online session
+        Import-Module(Import-PSSession $Session -AllowClobber -DisableNameChecking) -Global -DisableNameChecking
+    }
 
-  }
+    End {
+
+    }
 }

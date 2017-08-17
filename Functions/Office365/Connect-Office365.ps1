@@ -7,48 +7,47 @@
 ###############################################################################################################
 
 <#
-  .SYNOPSIS
-  Connect to Office 365 and Exchange Online powershell
+.SYNOPSIS
+Connect to Office 365 and Exchange Online powershell
 
-  .DESCRIPTION
-  Connect to Office 365 and Exchange Online powershell
+.DESCRIPTION
+Connect to Office 365 and Exchange Online powershell
 
-  .EXAMPLE
-  Connect-Office365
+.EXAMPLE
+Connect-Office365
 #>
 
-function Connect-Office365
-{
-  [CmdletBinding()]
-  param(
-    [Parameter(Position=0,Mandatory=$false,HelpMessage="Login-Credentials")]
-    [System.Management.Automation.CredentialAttribute()]$Credential
-  )
+function Connect-Office365 {
+    [CmdletBinding()]
+    param(
+        [Parameter(Position = 0, Mandatory = $false, HelpMessage = "Login-Credentials")]
+        [System.Management.Automation.CredentialAttribute()]$Credential
+    )
 
-  Begin{
+    Begin {
 
-  }
-
-  Process{
-    # Get login-credentials, if none were provided as parameter
-    If (!$Credential) {
-      $Credential = Get-Credential
     }
 
-    # Import the MSOnline Module
-    Import-Module MSOnline
+    Process {
+        # Get login-credentials, if none were provided as parameter
+        If (!$Credential) {
+            $Credential = Get-Credential
+        }
 
-    # Create the Exchange Online session
-    $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://ps.outlook.com/powershell -Credential $Credential -Authentication Basic –AllowRedirection
+        # Import the MSOnline Module
+        Import-Module MSOnline
 
-    # Connect the MSOnline Service
-    Connect-MsolService -Credential $Credential
+        # Create the Exchange Online session
+        $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://ps.outlook.com/powershell -Credential $Credential -Authentication Basic –AllowRedirection
 
-    # Import the created Exchange Online session
-    Import-Module(Import-PSSession $Session -AllowClobber -DisableNameChecking) -Global -DisableNameChecking
-  }
+        # Connect the MSOnline Service
+        Connect-MsolService -Credential $Credential
 
-  End{
+        # Import the created Exchange Online session
+        Import-Module(Import-PSSession $Session -AllowClobber -DisableNameChecking) -Global -DisableNameChecking
+    }
 
-  }
+    End {
+
+    }
 }
