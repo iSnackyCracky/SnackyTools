@@ -40,16 +40,16 @@ function Switch-Office365License {
 			Get-Content $PSScriptRoot\SKUPartNumbers.txt | Write-Host
         } else {	
             If ($UserPrincipalName) {
-                $o365Users = Get-MsolUser -UserPrincipalName $UserPrincipalName | Where-Object {$_.Licenses[0].AccountSkuId -like "*$oldSkuPartNumber*"}
+                $o365Users = Get-MsolUser -UserPrincipalName $UserPrincipalName | Where-Object {$_.Licenses[0].AccountSkuId -like "*$OldSkuPartNumber"}
             }
             else {
-                $o365Users = Get-MsolUser | Where-Object {$_.Licenses[0].AccountSkuId -like "*$oldSkuPartNumber*"}
+                $o365Users = Get-MsolUser | Where-Object {$_.Licenses[0].AccountSkuId -like "*$OldSkuPartNumber"}
             }
 			
             # Remove the old License
-            $o365Users | Set-MsolUserLicense -RemoveLicenses (Get-MsolAccountSku | Where-Object {$_.AccountSkuId -like $oldSkuPartNumber}).AccountSkuId
+            $o365Users | Set-MsolUserLicense -RemoveLicenses (Get-MsolAccountSku | Where-Object {$_.AccountSkuId -like "*$OldSkuPartNumber"}).AccountSkuId
             # Add the new License
-            $o365Users | Set-MsolUserLicense -AddLicenses (Get-MsolAccountSku | Where-Object {$_.SkuPartNumber -like $newSkuPartNumber}).AccountSkuId
+            $o365Users | Set-MsolUserLicense -AddLicenses (Get-MsolAccountSku | Where-Object {$_.SkuPartNumber -like "*$NewSkuPartNumber"}).AccountSkuId
             Write-Output $o365Users
         }
     }
