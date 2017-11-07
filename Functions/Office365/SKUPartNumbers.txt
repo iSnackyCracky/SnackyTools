@@ -1,0 +1,6 @@
+SKU-Part-Number         Office 365 Product
+---------------         ------------------
+SMB_BUSINESS_PREMIUM    Business Premium (Vorauszahlung)
+O365_BUSINESS_PREMIUM   Business Premium (CSP)
+
+

@@ -23,7 +23,7 @@ function Connect-SharePointOnline {
         [Parameter(Position = 0, Mandatory = $true, HelpMessage = "SharePoint-URL")]
         [String]$Url,
         [Parameter(Position = 1, Mandatory = $false, HelpMessage = "Login-Credentials")]
-        [System.Management.Automation.CredentialAttribute()]$Credential
+        [System.Management.Automation.CredentialAttribute()][SecureString]$Credential
     )
 
     Begin {
