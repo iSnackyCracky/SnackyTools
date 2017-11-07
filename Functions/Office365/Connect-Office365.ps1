@@ -22,9 +22,8 @@ function Connect-Office365 {
     param(
         [Parameter(Position = 0, Mandatory = $false, HelpMessage = "Login-Credentials")]
         [ValidateNotNull()]
-        [System.Management.Automation.PSCredential]
         [System.Management.Automation.Credential()]
-        $Credential
+        [System.Management.Automation.PSCredential]$Credential
     )
 
     Begin {
