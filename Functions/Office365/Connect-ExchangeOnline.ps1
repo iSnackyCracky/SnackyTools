@@ -21,7 +21,10 @@ function Connect-ExchangeOnline {
     [CmdletBinding()]
     param(
         [Parameter(Position = 0, Mandatory = $false, HelpMessage = "Login-Credentials")]
-        [System.Management.Automation.CredentialAttribute()]$Credential
+        [ValidateNotNull()]
+        [System.Management.Automation.Credential()]
+        [System.Management.Automation.PSCredential]$Credential
+
     )
 
     Begin {
