@@ -21,7 +21,10 @@ function Connect-Office365 {
     [CmdletBinding()]
     param(
         [Parameter(Position = 0, Mandatory = $false, HelpMessage = "Login-Credentials")]
-        [System.Management.Automation.CredentialAttribute()][SecureString]$Credential
+        [ValidateNotNull()]
+        [System.Management.Automation.PSCredential]
+        [System.Management.Automation.Credential()]
+        $Credential
     )
 
     Begin {
@@ -30,21 +33,27 @@ function Connect-Office365 {
 
     Process {
         # Get login-credentials, if none were provided as parameter
-        If (!$Credential) {
+        if (!$Credential) {
             $Credential = Get-Credential
         }
 
-        # Import the MSOnline Module
-        Import-Module MSOnline
-
-        # Create the Exchange Online session
-        $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://ps.outlook.com/powershell -Credential $Credential -Authentication Basic –AllowRedirection
-
-        # Connect the MSOnline Service
-        Connect-MsolService -Credential $Credential
-
-        # Import the created Exchange Online session
-        Import-Module(Import-PSSession $Session -AllowClobber -DisableNameChecking) -Global -DisableNameChecking
+        # Execute if credentials are provided now
+        if ($Credential) {
+            # Import the MSOnline Module
+            Import-Module MSOnline
+        
+            # Create the Exchange Online session
+            $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://ps.outlook.com/powershell -Credential $Credential -Authentication Basic –AllowRedirection
+        
+            # Connect the MSOnline Service
+            Connect-MsolService -Credential $Credential
+        
+            # Import the created Exchange Online session
+            Import-Module(Import-PSSession $Session -AllowClobber -DisableNameChecking) -Global -DisableNameChecking
+        } else { # Display an error if still no credentials
+            Write-Host "Please specify Login-Credentials"
+        }
+        
     }
 
     End {
