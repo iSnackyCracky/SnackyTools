@@ -21,7 +21,7 @@ function Connect-Office365 {
     [CmdletBinding()]
     param(
         [Parameter(Position = 0, Mandatory = $false, HelpMessage = "Login-Credentials")]
-        [System.Management.Automation.CredentialAttribute()]$Credential
+        [System.Management.Automation.CredentialAttribute()][SecureString]$Credential
     )
 
     Begin {
