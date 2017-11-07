@@ -14,7 +14,7 @@ Switch the License of one or all Users from one to another
 Switch the License of one or all Users from one to another
 
 .EXAMPLE
-Switch-Office365License
+Switch-Office365License -OldSkuPartNumber "SMB_BUSINESS_PREMIUM" -NewSkuPartNumber "O365_BUSINESS_PREMIUM"
 #>
 
 function Switch-Office365License {
@@ -40,47 +40,20 @@ function Switch-Office365License {
 			Get-Content $PSScriptRoot\SKUPartNumbers.txt | Write-Host
         } else {	
             If ($UserPrincipalName) {
-                $o365bpUsers = Get-MsolUser -UserPrincipalName $UserPrincipalName | Where-Object {$_.Licenses[0].AccountSkuId -like "*$oldSkuPartNumber*"}
+                $o365Users = Get-MsolUser -UserPrincipalName $UserPrincipalName | Where-Object {$_.Licenses[0].AccountSkuId -like "*$oldSkuPartNumber*"}
             }
             else {
-                $o365bpUsers = Get-MsolUser | Where-Object {$_.Licenses[0].AccountSkuId -like "*$oldSkuPartNumber*"}
+                $o365Users = Get-MsolUser | Where-Object {$_.Licenses[0].AccountSkuId -like "*$oldSkuPartNumber*"}
             }
 			
             # Remove the old License
-            $o365bpUsers | Set-MsolUserLicense -RemoveLicenses (Get-MsolAccountSku | Where-Object {$_.AccountSkuId -like $oldSkuPartNumber}).AccountSkuId
+            $o365Users | Set-MsolUserLicense -RemoveLicenses (Get-MsolAccountSku | Where-Object {$_.AccountSkuId -like $oldSkuPartNumber}).AccountSkuId
             # Add the new License
-            $o365bpUsers | Set-MsolUserLicense -AddLicenses (Get-MsolAccountSku | Where-Object {$_.SkuPartNumber -like $newSkuPartNumber}).AccountSkuId
+            $o365Users | Set-MsolUserLicense -AddLicenses (Get-MsolAccountSku | Where-Object {$_.SkuPartNumber -like $newSkuPartNumber}).AccountSkuId
+            Write-Output $o365Users
         }
     }
 	
     end {
     }
 }
-
-
-param (
-    [System.Management.Automation.PSCredential]$Credential,
-    [String]$UserPrincipalName
-)
-
-if (-not $Credential) {
-    $Credential = Get-Credential
-}
-
-$oldSkuPartNumber = "SMB_BUSINESS_PREMIUM"
-$newSkuPartNumber = "O365_BUSINESS_PREMIUM"
-
-Import-Module MSOnline
-Connect-MsolService -Credential $Credential
-
-If ($UserPrincipalName) {
-    $o365bpUsers = Get-MsolUser -UserPrincipalName $UserPrincipalName | Where-Object {$_.Licenses[0].AccountSkuId -like "*$oldSkuPartNumber*"}
-}
-else {
-    $o365bpUsers = Get-MsolUser | Where-Object {$_.Licenses[0].AccountSkuId -like "*$oldSkuPartNumber*"}
-}
-
-$o365bpUsers
-$o365bpUsers | Set-MsolUserLicense -RemoveLicenses (Get-MsolAccountSku | Where-Object {$_.AccountSkuId -like $oldSkuPartNumber}).AccountSkuId
-$o365bpUsers | Set-MsolUserLicense -AddLicenses (Get-MsolAccountSku | Where-Object {$_.SkuPartNumber -like $newSkuPartNumber}).AccountSkuId
-Get-MsolUser
