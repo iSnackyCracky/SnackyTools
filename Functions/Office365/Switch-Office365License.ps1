@@ -47,9 +47,11 @@ function Switch-Office365License {
             }
 			
             # Remove the old License
-            $o365Users | Set-MsolUserLicense -RemoveLicenses (Get-MsolAccountSku | Where-Object {$_.AccountSkuId -like "*$OldSkuPartNumber"}).AccountSkuId
+            $o365Users | Set-MsolUserLicense -RemoveLicenses (Get-MsolAccountSku | Where-Object {$_.SkuPartNumber -like "*$OldSkuPartNumber"}).AccountSkuId
             # Add the new License
             $o365Users | Set-MsolUserLicense -AddLicenses (Get-MsolAccountSku | Where-Object {$_.SkuPartNumber -like "*$NewSkuPartNumber"}).AccountSkuId
+            Write-Host $o365Users.Count "Betroffene Benutzer:"
+            Write-Host
             Write-Output $o365Users
         }
     }
