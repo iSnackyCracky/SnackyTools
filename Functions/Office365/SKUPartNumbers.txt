@@ -3,4 +3,6 @@ SKU-Part-Number         Office 365 Product
 SMB_BUSINESS_PREMIUM    Business Premium (Vorauszahlung)
 O365_BUSINESS_PREMIUM   Business Premium (CSP)
 
+ENTERPRISEPACK          Enterprise E3
 
+POWER_BI_PRO            Power-BI Pro
