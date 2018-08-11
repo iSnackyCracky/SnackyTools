@@ -2,7 +2,7 @@
 # Language     :  PowerShell 4.0
 # Filename     :  Set-FileTime.ps1
 # Autor        :  iSnackyCracky (https://isnackycracky.de/ -- https://github.com/isnackycracky/)
-# Description  :  Set timestamps on a file (like the unix touch command)
+# Description  :  Set timestamps on a file (like the unix touch command) - Taken from https://ss64.com/ps/syntax-touch.html
 # Repository   :  https://github.com/isnackycracky/SnackyTools
 ###############################################################################################################
 
