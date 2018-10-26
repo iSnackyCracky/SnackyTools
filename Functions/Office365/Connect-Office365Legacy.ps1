@@ -17,7 +17,7 @@ Connect to Office 365 and Exchange Online powershell
 Connect-Office365
 #>
 
-function Connect-Office365 {
+function Connect-Office365Legacy {
     [CmdletBinding()]
     param(
         [Parameter(Position = 0, Mandatory = $false, HelpMessage = "Login-Credentials")]
